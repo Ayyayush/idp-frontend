@@ -1,37 +1,125 @@
+import {
+  CheckCircle2,
+  Upload,
+  ScanText,
+  Brain,
+  Database,
+  FileText,
+} from "lucide-react";
+
 function ProcessingStatus() {
+
   const steps = [
-    "Upload",
-    "OCR",
-    "Classification",
-    "Entity Extraction",
-    "Summary",
+    {
+      title: "Document Upload",
+      icon: Upload,
+      color: "text-blue-400",
+    },
+    {
+      title: "OCR Extraction",
+      icon: ScanText,
+      color: "text-green-400",
+    },
+    {
+      title: "Document Classification",
+      icon: Brain,
+      color: "text-purple-400",
+    },
+    {
+      title: "Entity Extraction",
+      icon: Database,
+      color: "text-yellow-400",
+    },
+    {
+      title: "Summary Generation",
+      icon: FileText,
+      color: "text-pink-400",
+    },
   ];
 
   return (
-    <div className="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+    <div
+      className="
+      bg-slate-900
+      border
+      border-slate-800
+      rounded-xl
+      overflow-hidden
+      "
+    >
 
-      <h2 className="text-xl font-semibold mb-5 text-white">
-        Processing Pipeline
-      </h2>
+      <div className="p-5 border-b border-slate-800">
 
-      <div className="space-y-3">
+        <h2 className="text-xl font-semibold text-white">
+          AI Processing Pipeline
+        </h2>
 
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="flex justify-between items-center border-b border-slate-800 pb-2"
-          >
-            <span className="text-slate-300">
-              {step}
-            </span>
-
-            <span className="text-green-400">
-              ✓
-            </span>
-          </div>
-        ))}
+        <p className="text-slate-400 text-sm mt-1">
+          End-to-end document intelligence workflow
+        </p>
 
       </div>
+
+      <div className="p-5">
+
+        <div className="space-y-5">
+
+          {steps.map((step, index) => {
+
+            const Icon = step.icon;
+
+            return (
+              <div
+                key={index}
+                className="flex items-center justify-between"
+              >
+
+                <div className="flex items-center gap-4">
+
+                  <div
+                    className="
+                    h-11
+                    w-11
+                    rounded-xl
+                    bg-slate-800
+                    flex
+                    items-center
+                    justify-center
+                    "
+                  >
+                    <Icon
+                      size={20}
+                      className={step.color}
+                    />
+                  </div>
+
+                  <div>
+
+                    <h3 className="text-white font-medium">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-slate-500 text-sm">
+                      Completed
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <CheckCircle2
+                  size={22}
+                  className="text-green-400"
+                />
+
+              </div>
+            );
+          })}
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

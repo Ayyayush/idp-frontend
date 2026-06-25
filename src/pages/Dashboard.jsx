@@ -1,51 +1,117 @@
 import ProcessingStatus from "../components/ProcessingStatus";
 import RecentDocuments from "../components/RecentDocuments";
+import { useContext } from "react";
+import { DocumentContext } from "../context/DocumentContext";
 
 function Dashboard() {
+
+  const { result } =
+    useContext(DocumentContext);
+
   return (
-    <div>
+    <div className="space-y-8">
 
-      <h1 className="text-4xl font-bold mb-8 text-white">
-        Dashboard
-      </h1>
+      <div>
+        <h1 className="text-4xl font-bold text-white">
+          IDP Dashboard
+        </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+        <p className="text-slate-400 mt-2">
+          Intelligent Document Processing
+        </p>
+      </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl shadow">
-          <p className="text-slate-400">
-            Total Documents
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <p className="text-slate-400 text-sm">
+            System Status
           </p>
 
-          <h2 className="text-4xl font-bold mt-2 text-white">
-            120
+          <h2 className="text-green-400 text-2xl font-bold mt-2">
+            Online
           </h2>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl shadow">
-          <p className="text-slate-400">
-            Processed
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <p className="text-slate-400 text-sm">
+            Document Type
           </p>
 
-          <h2 className="text-4xl font-bold mt-2 text-white">
-            108
+          <h2 className="text-white text-2xl font-bold mt-2">
+            {result?.document_type || "-"}
           </h2>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl shadow">
-          <p className="text-slate-400">
-            Success Rate
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <p className="text-slate-400 text-sm">
+            Extraction Status
           </p>
 
-          <h2 className="text-4xl font-bold mt-2 text-green-400">
-            98%
+          <h2 className="text-blue-400 text-2xl font-bold mt-2">
+            {result
+              ? "Completed"
+              : "Waiting"}
+          </h2>
+        </div>
+
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <p className="text-slate-400 text-sm">
+            AI Pipeline
+          </p>
+
+          <h2 className="text-purple-400 text-2xl font-bold mt-2">
+            Active
           </h2>
         </div>
 
       </div>
 
-      <div className="mb-8">
-        <ProcessingStatus />
-      </div>
+      {result && (
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+
+          <h2 className="text-xl font-semibold text-white mb-5">
+            Latest Document
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-5">
+
+            <div>
+              <p className="text-slate-400 text-sm">
+                Filename
+              </p>
+
+              <h3 className="text-white mt-2">
+                {result.filename}
+              </h3>
+            </div>
+
+            <div>
+              <p className="text-slate-400 text-sm">
+                Document Type
+              </p>
+
+              <h3 className="text-blue-400 mt-2">
+                {result.document_type}
+              </h3>
+            </div>
+
+            <div>
+              <p className="text-slate-400 text-sm">
+                Summary Available
+              </p>
+
+              <h3 className="text-green-400 mt-2">
+                Yes
+              </h3>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+      <ProcessingStatus />
 
       <RecentDocuments />
 
