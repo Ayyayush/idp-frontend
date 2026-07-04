@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 
 function ProcessingStatus() {
-
   const steps = [
     {
       title: "Document Upload",
@@ -45,46 +44,77 @@ function ProcessingStatus() {
       border-slate-800
       rounded-xl
       overflow-hidden
+      w-full
       "
     >
-
-      <div className="p-5 border-b border-slate-800">
-
-        <h2 className="text-xl font-semibold text-white">
+      {/* Header */}
+      <div
+        className="
+        p-4
+        sm:p-5
+        border-b
+        border-slate-800
+        "
+      >
+        <h2
+          className="
+          text-lg
+          sm:text-xl
+          font-semibold
+          text-white
+          "
+        >
           AI Processing Pipeline
         </h2>
 
-        <p className="text-slate-400 text-sm mt-1">
+        <p
+          className="
+          text-slate-400
+          text-sm
+          mt-1
+          "
+        >
           End-to-end document intelligence workflow
         </p>
-
       </div>
 
-      <div className="p-5">
-
-        <div className="space-y-5">
-
+      {/* Steps */}
+      <div className="p-4 sm:p-5">
+        <div className="space-y-4 sm:space-y-5">
           {steps.map((step, index) => {
-
             const Icon = step.icon;
 
             return (
               <div
                 key={index}
-                className="flex items-center justify-between"
+                className="
+                flex
+                items-center
+                justify-between
+                gap-3
+                "
               >
-
-                <div className="flex items-center gap-4">
-
+                <div
+                  className="
+                  flex
+                  items-center
+                  gap-3
+                  min-w-0
+                  flex-1
+                  "
+                >
                   <div
                     className="
-                    h-11
-                    w-11
+                    h-10
+                    w-10
+                    sm:h-11
+                    sm:w-11
                     rounded-xl
                     bg-slate-800
                     flex
                     items-center
                     justify-center
+                    flex-shrink-0
                     "
                   >
                     <Icon
@@ -93,33 +123,43 @@ function ProcessingStatus() {
                     />
                   </div>
 
-                  <div>
-
-                    <h3 className="text-white font-medium">
+                  <div className="min-w-0">
+                    <h3
+                      className="
+                      text-white
+                      font-medium
+                      text-sm
+                      sm:text-base
+                      break-words
+                      "
+                    >
                       {step.title}
                     </h3>
 
-                    <p className="text-slate-500 text-sm">
+                    <p
+                      className="
+                      text-slate-500
+                      text-xs
+                      sm:text-sm
+                      "
+                    >
                       Completed
                     </p>
-
                   </div>
-
                 </div>
 
                 <CheckCircle2
                   size={22}
-                  className="text-green-400"
+                  className="
+                  text-green-400
+                  flex-shrink-0
+                  "
                 />
-
               </div>
             );
           })}
-
         </div>
-
       </div>
-
     </div>
   );
 }

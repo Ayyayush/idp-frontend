@@ -2,16 +2,15 @@ import {
   Bell,
   UserCircle,
   Sparkles,
+  Menu,
 } from "lucide-react";
 
 import { useContext } from "react";
 
 import { DocumentContext } from "../context/DocumentContext";
 
-function Navbar() {
-
-  const { result } =
-    useContext(DocumentContext);
+function Navbar({ toggleSidebar }) {
+  const { result } = useContext(DocumentContext);
 
   return (
     <header
@@ -23,32 +22,65 @@ function Navbar() {
       backdrop-blur-md
       border-b
       border-slate-800
-      px-8
-      py-4
+      px-4
+      sm:px-6
+      lg:px-8
+      py-3
       "
     >
+      <div className="flex items-center justify-between gap-3">
+        {/* Left */}
+        <div className="flex items-center gap-3 min-w-0">
+          {/* Mobile Sidebar Button */}
+          <button
+            onClick={toggleSidebar}
+            className="
+            lg:hidden
+            p-2
+            rounded-lg
+            bg-slate-800
+            hover:bg-slate-700
+            transition
+            flex-shrink-0
+            "
+          >
+            <Menu size={22} className="text-white" />
+          </button>
 
-      <div className="flex justify-between items-center">
+          <div className="min-w-0">
+            <h2
+              className="
+              text-lg
+              sm:text-xl
+              font-bold
+              text-white
+              truncate
+              "
+            >
+              IDP Dashboard
+            </h2>
 
-        <div>
-
-          <h2 className="font-bold text-xl text-white">
-            IDP Dashboard
-          </h2>
-
-          <p className="text-sm text-slate-400">
-            Intelligent Document Processing
-          </p>
-
+            <p
+              className="
+              hidden
+              sm:block
+              text-sm
+              text-slate-400
+              truncate
+              "
+            >
+              Intelligent Document Processing
+            </p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-5">
-
+        {/* Right */}
+        <div className="flex items-center gap-2 sm:gap-4">
           {result && (
             <div
               className="
               hidden
-              md:flex
+              xl:flex
               items-center
               gap-2
               px-4
@@ -64,15 +96,17 @@ function Navbar() {
                 className="text-blue-400"
               />
 
-              <span className="text-blue-400 text-sm">
+              <span className="text-blue-400 text-sm whitespace-nowrap">
                 {result.document_type}
               </span>
-
             </div>
           )}
 
           <div
             className="
+            hidden
+            md:flex
+            items-center
             px-4
             py-2
             rounded-full
@@ -81,35 +115,41 @@ function Navbar() {
             border-green-500/20
             text-green-400
             text-sm
+            whitespace-nowrap
             "
           >
             ● System Online
           </div>
 
-          <Bell
-            size={20}
+          <button
             className="
-            text-slate-400
-            hover:text-white
-            cursor-pointer
-            transition-all
+            p-2
+            rounded-lg
+            hover:bg-slate-800
+            transition
             "
-          />
+          >
+            <Bell
+              size={20}
+              className="text-slate-400 hover:text-white"
+            />
+          </button>
 
-          <UserCircle
-            size={30}
+          <button
             className="
-            text-slate-400
-            hover:text-white
-            cursor-pointer
-            transition-all
+            p-1
+            rounded-full
+            hover:bg-slate-800
+            transition
             "
-          />
-
+          >
+            <UserCircle
+              size={32}
+              className="text-slate-400 hover:text-white"
+            />
+          </button>
         </div>
-
       </div>
-
     </header>
   );
 }
