@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { DocumentContext } from "../context/DocumentContext";
 
 function Navbar({ toggleSidebar }) {
-  const { result } = useContext(DocumentContext);
+  const { document } = useContext(DocumentContext);
 
   return (
     <header
@@ -76,7 +76,7 @@ function Navbar({ toggleSidebar }) {
 
         {/* Right */}
         <div className="flex items-center gap-2 sm:gap-4">
-          {result && (
+          {document?.documentType && (
             <div
               className="
               hidden
@@ -97,7 +97,7 @@ function Navbar({ toggleSidebar }) {
               />
 
               <span className="text-blue-400 text-sm whitespace-nowrap">
-                {result.document_type}
+                {document.documentType}
               </span>
             </div>
           )}

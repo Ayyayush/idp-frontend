@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 import Dashboard from "../pages/Dashboard";
 import UploadPage from "../pages/UploadPage";
@@ -11,7 +12,13 @@ import ChatPage from "../pages/ChatPage";
 function AppRoutes() {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
+      <Route
+        element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/" element={<Dashboard />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/extract" element={<ExtractionPage />} />
